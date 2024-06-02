@@ -1,0 +1,41 @@
+sub () {
+    var1=$1
+    sign=$2
+    var2=$3
+
+    if [ "$sign" == "+" ];
+        then
+         echo $[ var1+var2 ]
+
+    elif [ "$sign" == "-" ];
+        then
+         echo $[ var1-var2 ]
+
+    elif [ "$sign" == "x" ];
+        then
+         echo $[ var1*var2 ]
+
+    elif [ "$sign" == "/" ];
+        then
+         echo $[ var1 / var2 ]
+    fi
+
+        yesOrNo;
+}
+
+yesOrNo () {
+        read -p "Continue (y/n)? " choice
+    if [ $choice == "y" ]; then
+        clear
+        echo "New expression:"
+        read -p "format (num1 sign num2):" var1 sign var2
+        sub "$var1" "$sign" "$var2"
+    elif [ "$choice" == "n" ]; then
+        clear
+    else
+        yesOrNo;
+    fi
+}
+
+
+sub $1 $2 $3
