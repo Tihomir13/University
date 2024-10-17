@@ -1,6 +1,6 @@
 all: compile run
 
 compile:
-        gcc -o program queue/methods.c 
+        gcc -o program main.c queue/methods.c 
 run:
         ./program
