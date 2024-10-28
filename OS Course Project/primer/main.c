@@ -2,7 +2,7 @@
 ucontext_t uctx_func, uctx_main;
 void func1()
 {
-    printf(“Hello I am func1\n”);
+    printf("Hello I am func1\n");
 }
 int main()
 {
@@ -13,5 +13,4 @@ int main()
     uctx_func.uc_stack.ss_flags = 0;
     makecontext(&uctx_func, func1, 0);
     swapcontext(&uctx_main, &uctx_func);
-    ...
 }
