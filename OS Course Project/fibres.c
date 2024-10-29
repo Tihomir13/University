@@ -1,32 +1,33 @@
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include <ucontext.h>
 
-constexpr int STACK_SIZE = 8192;
+#define FIBER_STACK 1024 * 64
 ucontext_t mainContext, fiber1Context, fiber2Context, fiber3Context;
 
 void fiber1() {
-    std::cout << "fiber1 start\n";
+    printf("fiber1 start\n");
     swapcontext(&fiber1Context, &fiber2Context);
-    std::cout << "fiber1 end\n";
+    printf("fiber1 end\n");
     swapcontext(&fiber1Context, &fiber3Context);
 }
 
 void fiber2() {
-    std::cout << "fiber2 start\n";
+    printf("fiber2 start\n");
     swapcontext(&fiber2Context, &fiber3Context);
-    std::cout << "fiber2 end\n";
+    printf("fiber2 end\n");
     swapcontext(&fiber2Context, &fiber1Context);
 }
 
 void fiber3() {
-    std::cout << "fiber3 start\n";
+    printf("fiber3 start\n");
     swapcontext(&fiber3Context, &fiber1Context);
-    std::cout << "fiber3 end\n";
+    printf("fiber3 end\n");
     swapcontext(&fiber3Context, &mainContext);
 }
 
 int main() {
-    char stack1[STACK_SIZE], stack2[STACK_SIZE], stack3[STACK_SIZE];
+    char stack1[FIBER_STACK], stack2[FIBER_STACK], stack3[FIBER_STACK];
 
     // Инициализация на fiber1
     getcontext(&fiber1Context);
@@ -49,9 +50,9 @@ int main() {
     fiber3Context.uc_link = &mainContext;
     makecontext(&fiber3Context, fiber3, 0);
 
-    std::cout << "main start\n";
+    printf("main start\n");
     swapcontext(&mainContext, &fiber1Context);
-    std::cout << "main end\n";
+    printf("main end\n");
 
     return 0;
 }
