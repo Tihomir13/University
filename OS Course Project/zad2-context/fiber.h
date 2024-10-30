@@ -2,7 +2,10 @@
 #ifndef FIBER_H
 #define FIBER_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <ucontext.h>
+
 #define FIBER_STACK 1024 * 64
 
 // Декларация на функцията fiber
