@@ -1,18 +1,10 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <ucontext.h>
+#include "fiber.h"
 
 #define FIBER_STACK 1024 * 64
 
-ucontext_t mainContext, fiber1Context, fiber2Context, fiber3Context;
-
-// Променяме параметрите на `fiber` да приемат само указатели и да използват глобални променливи
-void fiber(ucontext_t* currContext, ucontext_t* nextContext, const char* nameCurr, const char* nameNext) {
-    printf("%s: started\n", nameCurr);
-    printf("%s: Now swap context to %s\n", nameCurr, nameNext);
-    swapcontext(currContext, nextContext);
-    printf("%s: finished\n", nameCurr);
-}
+ucontext_t mainContext, fiber1Context;
 
 int main() {
     char stack1[FIBER_STACK];
@@ -21,7 +13,7 @@ int main() {
     getcontext(&fiber1Context);
     fiber1Context.uc_stack.ss_sp = stack1;
     fiber1Context.uc_stack.ss_size = sizeof(stack1);
-    fiber1Context.uc_link = &mainContext;  // Връща се към mainContext след приключване на fiber1
+    fiber1Context.uc_link = &mainContext;
 
     // Променяме извикването на `makecontext` и параметрите, за да работи с `fiber`
     makecontext(&fiber1Context, (void (*)())fiber, 4, &fiber1Context, &mainContext, "Fiber1", "Main");
