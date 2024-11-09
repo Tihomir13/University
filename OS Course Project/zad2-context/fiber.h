@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ucontext.h>
+#include "../structures/tcb.h"
 
 #define FIBER_STACK 1024 * 64
 
