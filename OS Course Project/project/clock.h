@@ -1,8 +1,9 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
-extern int virtual_clock; // Глобален часовник
+#include "queue.h"
 
-void setup_clock();
+// Декларация за настройка на виртуалния часовник
+void setup_clock(TaskQueue *taskQueue);
 
 #endif // CLOCK_H
