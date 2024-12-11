@@ -8,19 +8,19 @@
 // Функции на задачите
 void taskFunc1() {
     while (1) {
-        printf("+\n");
+        printf("+");
     }
 }
 
 void taskFunc2() {
     while (1) {
-        printf("-\n");
+        printf("-");
     }
 }
 
 void taskFunc3() {
     while (1) {
-        printf("!\n");
+        printf("!");
     }
 }
 

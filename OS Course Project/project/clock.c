@@ -37,7 +37,7 @@ void setup_clock(TaskQueue *taskQueue) {
     sigaction(SIGALRM, &sa, NULL);
 
     struct itimerval timer;
-    timer.it_interval.tv_sec = 1;  // Честота на прекъсванията (1 секунда)
+    timer.it_interval.tv_sec = 5;  // Честота на прекъсванията (1 секунда)
     timer.it_interval.tv_usec = 0;
     timer.it_value.tv_sec = 1;     // Първоначално забавяне (1 секунда)
     timer.it_value.tv_usec = 0;
